@@ -1,0 +1,119 @@
+{
+    "name": "Trajectory Optimization Development",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12",
+            "installTools": true,
+            "optimize": true
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20",
+            "nodeGypDependencies": true,
+            "installYarnUsingApt": true
+        },
+        "ghcr.io/devcontainers/features/git:1": {
+            "ppa": true,
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "moby": true,
+            "dockerDashComposeVersion": "v2"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.linting.flake8Enabled": true,
+                "python.formatting.provider": "black",
+                "python.formatting.blackArgs": ["--line-length=88"],
+                "python.sortImports.args": ["--profile", "black"],
+                "python.testing.pytestEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "python.testing.nosetestsEnabled": false,
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": true
+                },
+                "files.exclude": {
+                    "**/__pycache__": true,
+                    "**/*.pyc": true,
+                    "**/node_modules": true,
+                    "**/dist": true,
+                    "**/build": true
+                },
+                "typescript.preferences.includePackageJsonAutoImports": "auto",
+                "eslint.workingDirectories": ["./frontend"],
+                "prettier.configPath": "./frontend/.prettierrc"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.flake8",
+                "ms-python.black-formatter",
+                "ms-python.isort",
+                "ms-python.pylint",
+                "ms-toolsai.jupyter",
+                "ms-vscode.vscode-typescript-next",
+                "bradlc.vscode-tailwindcss",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "ms-vscode.vscode-json",
+                "redhat.vscode-yaml",
+                "ms-vscode.hexdump",
+                "ms-vscode.live-server",
+                "ms-vscode-remote.remote-containers",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "ms-vsliveshare.vsliveshare",
+                "eamodio.gitlens",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake"
+            ]
+        }
+    },
+    "forwardPorts": [
+        3000,
+        5000,
+        8000,
+        8080
+    ],
+    "portsAttributes": {
+        "3000": {
+            "label": "React Development Server",
+            "onAutoForward": "notify"
+        },
+        "5000": {
+            "label": "Flask Backend Server",
+            "onAutoForward": "notify"
+        },
+        "8000": {
+            "label": "General Development Server",
+            "onAutoForward": "silent"
+        },
+        "8080": {
+            "label": "Alternative Web Server",
+            "onAutoForward": "silent"
+        }
+    },
+    "postCreateCommand": "pip install -r requirements.txt && echo 'Development environment ready!'",
+    "remoteUser": "vscode",
+    "containerEnv": {
+        "PYTHONPATH": "/workspaces/trajectory_optimization",
+        "FLASK_ENV": "development",
+        "FLASK_DEBUG": "1",
+        "NODE_ENV": "development"
+    },
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    "runArgs": [
+        "--init"
+    ]
+}
