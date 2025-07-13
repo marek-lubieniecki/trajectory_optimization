@@ -1,0 +1,33 @@
+# Core dependencies for trajectory optimization
+casadi>=3.6.0
+numpy>=1.21.0
+matplotlib>=3.5.0
+
+# Scientific computing and optimization
+scipy>=1.9.0
+sympy>=1.11.0
+
+# Development tools
+jupyter>=1.0.0
+ipykernel>=6.15.0
+ipywidgets>=8.0.0
+
+# Code quality and formatting
+black>=22.0.0
+flake8>=5.0.0
+autopep8>=1.6.0
+pylint>=2.15.0
+
+# Plotting and visualization enhancements
+seaborn>=0.11.0
+plotly>=5.10.0
+
+# Animation support (for rocket_landing.gif generation)
+pillow>=9.0.0
+imageio>=2.20.0
+
+# Testing
+pytest>=7.0.0
+
+# Documentation
+sphinx>=5.0.0
